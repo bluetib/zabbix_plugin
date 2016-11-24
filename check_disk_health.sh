@@ -33,15 +33,15 @@ check_disk_count() {
 }
 
 case $1 in
-Support)
-    check_support
-    ;;
-*)
-    echo "Critical Failed Degraded Offline Physical Virtual Disks" | grep "$1" &> /dev/null
-    if [ $? != '0' ] || [ -z "$1" ] ;then
-        echo "Usage: $0 Critical Failed Degraded Offline Physical Virtual Disks Support"
-    else
-        check_disk_count $1
-    fi
-    ;;
+    Support)
+        check_support
+        ;;
+    *)
+        echo "Critical Failed Degraded Offline Physical Virtual Disks" | grep "$1" &> /dev/null
+        if [ $? != '0' ] || [ -z "$1" ] ;then
+            echo "Usage: $0 Critical Failed Degraded Offline Physical Virtual Disks Support"
+        else
+            check_disk_count $1
+        fi
+        ;;
 esac

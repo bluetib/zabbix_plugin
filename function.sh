@@ -17,7 +17,7 @@ json_null() {
 }
 
 str_md5() {
-  echo $1 | md5sum | awk '{ print $1 }'
+    echo $1 | md5sum | awk '{ print $1 }'
 }
 
 tmpfile_md5() {
@@ -25,7 +25,7 @@ tmpfile_md5() {
 }
 
 low_case() {
-  echo $1 | tr [A-Z] [a-z]
+    echo $1 | tr [A-Z] [a-z]
 }
 
 if [ -d "/dev/shm" ];then

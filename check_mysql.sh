@@ -34,7 +34,7 @@ slave_discovery() {
 }
 
 mysql_ping() {
-	$mysql_cli -e 'show global status' 2> /dev/null > $tmpfile && $mysql_cli -e 'show global variables' 2> /dev/null >> $tmpfile && $mysql_cli -e 'show slave status\G' 2> /dev/null  >> $tmpfile && echo 1 || echo 0
+    $mysql_cli -e 'show global status' 2> /dev/null > $tmpfile && $mysql_cli -e 'show global variables' 2> /dev/null >> $tmpfile && $mysql_cli -e 'show slave status\G' 2> /dev/null  >> $tmpfile && echo 1 || echo 0
 }
 
 mysql_perf() {
@@ -45,39 +45,39 @@ mysql_perf() {
 }
 
 slave_status() {
-	slave_running=`mysql_perf 'Slave_running'`
-        io_running=`mysql_perf 'Slave_IO_Running'`
-        sql_running=`mysql_perf 'Slave_SQL_Running'`
-        if [ "$slave_running" == 'ON' ];then
-            if [ "$io_running" == 'No' -o "$sql_running" == 'No' ];then
-                echo 0
-            else
-                echo 1
-            fi
+    slave_running=`mysql_perf 'Slave_running'`
+    io_running=`mysql_perf 'Slave_IO_Running'`
+    sql_running=`mysql_perf 'Slave_SQL_Running'`
+    if [ "$slave_running" == 'ON' ];then
+        if [ "$io_running" == 'No' -o "$sql_running" == 'No' ];then
+            echo 0
         else
-            if [ "$io_running" == 'Yes' -o "$sql_running" == 'Yes' ];then
-               echo 0
-            else
-               echo 3
-            fi
+            echo 1
         fi
+    else
+        if [ "$io_running" == 'Yes' -o "$sql_running" == 'Yes' ];then
+            echo 0
+        else
+            echo 3
+        fi
+    fi
 
 }
 
 read_behind_master() {
-        master_host=`mysql_perf 'Master_Host'`
-        master_port=`mysql_perf 'Master_Port'`
-	mysql_ping &> /dev/null &&  ${mysql_cli} -h$master_host -P$master_port -e 'show master status\G' 2> /dev/null >> $tmpfile || echo "NULL"
-        master_file=`mysql_perf 'File'`
-	master_file_pos=`mysql_perf 'Position'`
-        read_file=`mysql_perf 'Master_Log_File'`
-	read_file_pos=`mysql_perf 'Read_Master_Log_Pos'`
+    master_host=`mysql_perf 'Master_Host'`
+    master_port=`mysql_perf 'Master_Port'`
+    mysql_ping &> /dev/null &&  ${mysql_cli} -h$master_host -P$master_port -e 'show master status\G' 2> /dev/null >> $tmpfile || echo "NULL"
+    master_file=`mysql_perf 'File'`
+    master_file_pos=`mysql_perf 'Position'`
+    read_file=`mysql_perf 'Master_Log_File'`
+    read_file_pos=`mysql_perf 'Read_Master_Log_Pos'`
 
-        if [ $master_file != $read_file ];then
-            echo $master_file_pos
-        else
-            echo $(( $master_file_pos - $read_file_pos ))
-        fi
+    if [ $master_file != $read_file ];then
+        echo $master_file_pos
+    else
+        echo $(( $master_file_pos - $read_file_pos ))
+    fi
 }
 
 
