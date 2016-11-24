@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Desc: zabbix self key get pv, uv, download yesterday from nginx log 
+# Desc: zabbix self key get pv, uv, download yesterday from nginx log
 #
 
 domain_name=$1

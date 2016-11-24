@@ -63,7 +63,7 @@ redis_conf() {
 }
 
 redis_size() {
-    $redis_cli dbsize | head -1 
+    $redis_cli dbsize | head -1
 }
 
 case $1 in
@@ -81,7 +81,7 @@ tmpfile_md5)
     ;;
 dbsize)
     redis_size
-    ;;   
+    ;;
 perf)
     if [ ! -z "$3" ];then
        redis_perf $3

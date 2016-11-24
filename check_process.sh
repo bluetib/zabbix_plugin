@@ -37,7 +37,7 @@ proc_status() {
 proc_mem() {
     proc=$1
     total_mem=0
-    mem_list=$(ps axu | grep $proc | egrep -v 'grep|vim|check_proc' | awk '{ print $6 }') 
+    mem_list=$(ps axu | grep $proc | egrep -v 'grep|vim|check_proc' | awk '{ print $6 }')
     for i in $mem_list;do
         total_mem=$(echo $total_mem + $i | bc)
     done
@@ -54,7 +54,7 @@ proc_cpu() {
     echo $total_cpu
 }
 
-case $1 in 
+case $1 in
 discovery)
     proc_discovery
     ;;

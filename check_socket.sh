@@ -5,7 +5,7 @@
 #
 
 get_data() {
-   /usr/sbin/ss -s | head -2 | grep -o  "$1:\?[[:space:]]*[0-9]\{1,\}"  | awk '{ print $2 }' 
+   /usr/sbin/ss -s | head -2 | grep -o  "$1:\?[[:space:]]*[0-9]\{1,\}"  | awk '{ print $2 }'
 }
 
 case $1 in

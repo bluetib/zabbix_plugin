@@ -46,7 +46,7 @@ mysql_perf() {
 
 slave_status() {
 	slave_running=`mysql_perf 'Slave_running'`
-        io_running=`mysql_perf 'Slave_IO_Running'` 
+        io_running=`mysql_perf 'Slave_IO_Running'`
         sql_running=`mysql_perf 'Slave_SQL_Running'`
         if [ "$slave_running" == 'ON' ];then
             if [ "$io_running" == 'No' -o "$sql_running" == 'No' ];then
@@ -61,7 +61,7 @@ slave_status() {
                echo 3
             fi
         fi
-        
+
 }
 
 read_behind_master() {
@@ -72,7 +72,7 @@ read_behind_master() {
 	master_file_pos=`mysql_perf 'Position'`
         read_file=`mysql_perf 'Master_Log_File'`
 	read_file_pos=`mysql_perf 'Read_Master_Log_Pos'`
-        
+
         if [ $master_file != $read_file ];then
             echo $master_file_pos
         else
